@@ -117,7 +117,7 @@
 		<img id="imgCen" class="square" src="">
 		<img class="blank square" src="">
 		<img class="option square bottom" src="">
-		<img id="start" class="square" src="./imgs/start.png">
+		<img id="start" class="square" src="./mts/imgs/start.png">
 		<img class="option square bottom" src="">
 
 		<div>
@@ -160,32 +160,32 @@
 	var options= document.querySelectorAll(".option");
 	// to do: make a list of cartoon image versions as well
 	var monkeyPics=[
-		"./imgs/monkey1.jpg",
-		"./imgs/monkey2.jpg",
-		"./imgs/monkey3.jpg",
-		"./imgs/monkey4.jpg",
-		"./imgs/monkey5.jpg",
-		"./imgs/monkey6.jpg",
-		"./imgs/monkey7.jpg",
-		"./imgs/monkey9.jpg",
-		"./imgs/monkey10.jpg",
-		"./imgs/monkey11.jpg",
-		"./imgs/monkey12.jpg"
+		"./mts/imgs/monkey1.jpg",
+		"./mts/imgs/monkey2.jpg",
+		"./mts/imgs/monkey3.jpg",
+		"./mts/imgs/monkey4.jpg",
+		"./mts/imgs/monkey5.jpg",
+		"./mts/imgs/monkey6.jpg",
+		"./mts/imgs/monkey7.jpg",
+		"./mts/imgs/monkey9.jpg",
+		"./mts/imgs/monkey10.jpg",
+		"./mts/imgs/monkey11.jpg",
+		"./mts/imgs/monkey12.jpg"
 	];
 
 	var patternPics=[
-		"./imgs/4.png",
-		"./imgs/5.png",
-		"./imgs/6.png",
-		"./imgs/7.png",
-		"./imgs/8.png",
-		"./imgs/9.png",
-		"./imgs/10.png",
-		"./imgs/11.png",
-		"./imgs/12.png",
-		"./imgs/13.png",
-		"./imgs/14.png",
-		"./imgs/15.png",
+		"./mts/imgs/4.png",
+		"./mts/imgs/5.png",
+		"./mts/imgs/6.png",
+		"./mts/imgs/7.png",
+		"./mts/imgs/8.png",
+		"./mts/imgs/9.png",
+		"./mts/imgs/10.png",
+		"./mts/imgs/11.png",
+		"./mts/imgs/12.png",
+		"./mts/imgs/13.png",
+		"./mts/imgs/14.png",
+		"./mts/imgs/15.png",
 	]
 
 	var images=[];
@@ -197,8 +197,8 @@
 	numTrials=0;
 
 
-	goodSound = new Howl({ src: ['sounds/Excellent.wav']});
-	badSound = new Howl({src: ['sounds/sm_dooo.wav']});
+	goodSound = new Howl({ src: ['./mtssounds/Excellent.wav']});
+	badSound = new Howl({src: ['./mts/sounds/sm_dooo.wav']});
 
 	starting();
 	$("#start").click(matchImage);
@@ -210,11 +210,11 @@
 		numTrials++;
 		if($(this).attr("src")===picked){
 			numCorrect++;
-			$("#imgCen").attr("src","./imgs/good.png");
+			$("#imgCen").attr("src","./mts/imgs/good.png");
 			goodSound.play();
 		}
 		else{
-			$("#imgCen").attr("src","./imgs/bad.png");
+			$("#imgCen").attr("src","./mts/imgs/bad.png");
 			badSound.play();
 		}
 
