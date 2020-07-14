@@ -5,9 +5,9 @@
 	<!-- should the locations be randomized? -->
 <!DOCTYPE html>
 <html>
-<head> 
-	<title>Categorization</title>
-	<link rel="icon" href="./Categorization/imgs/emory.png">
+<head>
+	<title>Sequence</title>
+	<link rel="icon" href="./catagorization/imgs/emory.png">
 	<style type="text/css">
 		body{
 			font-family: "monsterrat","Avenir";
@@ -95,13 +95,6 @@
 			padding:0px;
 		}
 
-		/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-		@media screen and (max-width: 540px) {
-		  div.text {
-		    font-size: 20px;
-		  }
-		}
-
 		#score {
 			text-align: center;
 			letter-spacing: 1px;
@@ -141,9 +134,10 @@
 </head>
 <body>
 <div>
-	<h1>Categorization Test</h1>
+	<h1>Sequence Test</h1>
 
 	<div id="stripe">
+			<!-- Todo: this feedback does not really apply well here -->
 			<h3 id="score">Percent Correct: <span id="numCorrect"> 0.00% </span></h3>
 			<div id="spacer"></div>
 			<button id="reset"> Reset </button>
@@ -151,22 +145,19 @@
 
 
 	<div id="fullGame">
-		<img id="bird" class="stim square" src="./Categorization/imgs/birdSym.png" value="bird">
-		<img class="blank square" src="">
-		<img id="fish" class="stim square" src="./Categorization/imgs/fishSym.png" value="fish">
-		<img class="blank square" src="">
-		<img id="imgCen" class="square" src="">
-		<img class="blank square" src="">
-		<img id="flow" class="stim square" src="./Categorization/imgs/flowSym.png" value="flow">
-		<img id="start" class="square" src="./Categorization/imgs/start.png">
-		<img id="peop" class="stim square" src="./Categorization/imgs/peopSym.png" value="peop">
+		<img class="stim square" src="">
+		<img class="stim square" src="">
+		<img class="stim square" src="">
+		<img class="stim square" src="">
+		<img id="imgCen" class="stim square" src="">
+		<img class="stim square" src="">
+		<img class="stim square"  src="">
+		<img id="start" class="stim square"  src="">
+		<img class="stim square"  src="">
 
-		<div class="text">
-			<p>We use this test to assess how monkeys categorize objects. There are 4 categories: birds, fish, flowers, and people. Each category is matched with an arbitray symbol, much as we match categories with arbitray strings of letters (e.g., a bird is matched with the letter sequence "bird").
-			
-			How fast can you learn which symbol corresponds to each category?
-			
-			After learning the categories, how well would you do with new images from the same category? What would it mean about the way you were solving the task if you had to relearn each new image?</p>
+		<div>
+			<!-- to do: need to write a paragraph -->
+			<p>OOO</p>
 
 		</div> 
 	</div>
@@ -184,37 +175,34 @@
 
 	var picked;
 	var seconds=1000;
-	numCorrect=0;
-	numTrials=0;
+	// numCorrect=0;
+	// numTrials=0;
 
 
-	goodSound = new Howl({ src: ['./Categorization/sounds/Excellent.wav']});
-	badSound = new Howl({src: ['./Categorization/sounds/sm_dooo.wav']});
+	goodSound = new Howl({ src: ['./catagorizationsounds/Excellent.wav']});
+	badSound = new Howl({src: ['./catagorizationsounds/sm_dooo.wav']});
 
 	starting();
-	$("#start").click(matchImage);
-	$("#imgCen").click(function(){
-		$(this).css("visibility", "hidden")
-		setTimeout(testing, seconds)});
+	$("#start").click(testing);
 	$(".stim").click(function(){
 		// check correct
-		numTrials++;
+		// numTrials++;
 
 		console.log($(this).attr("id"))
 		console.log(picked)
-		if($(this).attr("id")===picked){
-			numCorrect++;
-			$("#imgCen").attr("src","./Categorization/imgs/good.png");
+		if($(this).attr("id")===picked){ // to do: need to change this condition
+			// numCorrect++;
+			$("#imgCen").attr("src","./catagorization/imgs/good.png");
 			goodSound.play();
 		}
 		else{
-			$("#imgCen").attr("src","./Categorization/imgs/bad.png");
+			$("#imgCen").attr("src","./catagorization/imgs/bad.png");
 			badSound.play();
 		}
 
 		$(".stim").css("visibility","hidden");
 		$("#imgCen").css("visibility","visible");
-		$("#numCorrect").text((numCorrect/numTrials*100).toFixed(2) + "%");
+		// $("#numCorrect").text((numCorrect/numTrials*100).toFixed(2) + "%");
 		setTimeout(starting, 2000);
 		
 	})
@@ -234,18 +222,15 @@
 		generateImages();
 
 		//set visibility of everything to hidden except for start button
+		$("#imgCen").attr("src", "./sequence/imgs/start.png")
+
 		$(".stim").css("visibility","hidden");
-		$("#imgCen").css("visibility","hidden");
 		$("#start").css("visibility","visible");
 	}
 
-	function matchImage(){
-		//reset visibilities
-		$(".stim").css("visibility","hidden");
-		$("#imgCen").css("visibility","visible");
-		$("#start").css("visibility","hidden");
-	}
 
+
+	// to do!!
 	function testing(){
 		// delay
 		// display the correct number of images
@@ -254,26 +239,15 @@
 		$("#start").css("visibility","hidden");
 	}
 
+
+	// to do!!
 	function generateImages(){
-		var type = Math.floor(Math.random() * 4);
+		var sequence = Math.floor(Math.random() * 4);
 		var pic = Math.floor(Math.random()*10)+1;
 		console.log(pic);
 		var path;
 
-		if(type === 0){
-			picked= "fish";
-		}		
-		else if(type === 1){
-			picked= "flow"
-		}
-		else if(type === 2){
-			picked= "bird"
-		}
-		else if(type === 3){
-			picked= "peop"
-		}
 
-		$("#imgCen").attr("src","./Categorization/imgs/"+picked+"/"+pic+".png");
 	}
 
 

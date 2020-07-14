@@ -40,6 +40,33 @@
 			-moz-transition: background 0.6s;
 		}
 
+
+
+		button{
+			border: none;
+			background: none;
+			height: 100%;
+
+
+			font-weight: 500;
+			color: white;
+			letter-spacing: 1px;
+			font-size: inherit;
+
+			/*any time something changes takes time to fade in*/
+			transition: all 0.3s; 
+			--webkit-transition: all 0.3s;
+			-moz-transition: all 0.3s;
+
+			outline: none;
+			display: inline-flex;
+		}
+
+		button:hover{
+			background: #244d25;
+			color: white;
+		}
+
 		#fullGame {
 			background: black;
 			max-width: 600px;
@@ -60,6 +87,11 @@
 			margin: 20px auto;
 		}
 
+		#spacer{
+			width: 22%;
+			display: inline-block;
+		}
+
 		#start {
 			/*background: #00b300;*/
 			height: 160px;
@@ -72,7 +104,14 @@
 			font-weight: 500;
 			color:white;
 			margin:0;
+			display: inline-block;
 			/*padding:10px;*/
+		}
+
+		@media screen and (max-width: 540px) {
+		  .text {
+		    font-size: 20px;
+		  }
 		}
 
 		.var{
@@ -108,7 +147,10 @@
 
 	<div id="stripe">
 			<h3 id="score">Percent Correct: <span id="numCorrect"> 0.00% </span></h3>
+			<div id="spacer"></div>
+			<button id="reset"> Reset </button>
 	</div>
+
 
 
 	<div id="fullGame">
@@ -122,17 +164,35 @@
 		<img id="start" class="square" src="./mts/imgs/start.png">
 		<img class="option square bottom" src="">
 
-		<div>
+		<div class="text">
 			<p>In our lab, we assess monkeys' memory using computerized tests. This test of picture recognition is almost identical to ones we use with monkeys. Click the green "start" key to begin a trial. At study, click the image in the center. At test, click the image you remember studying.</p>
-			<div id="variables">
+			<div id="variables" >
 				<div class="var">
 					<h3>Delay</h3>
-					<input id="delay" type="number" name="delay" placeholder="1.0" min="0" max="10" value="1">
+					<select name="delay" id="delay" placeholder="1.0">
+						<option value="1.0">1.0</option>
+						<option value="2.0">2.0</option>
+						<option value="3.0">3.0</option>
+						<option value="4.0">4.0</option>
+						<option value="5.0">5.0</option>
+						<option value="6.0">6.0</option>
+						<option value="7.0">7.0</option>
+						<option value="8.0">8.0</option>
+						<option value="9.0">9.0</option>
+						<option value="10.0">10.0</option>
+					</select> seconds
+					<!-- <input id="delay" type="number" name="delay" placeholder="1.0" min="0" max="10" value="1"> -->
 					<p>Monkeys tend to forget things quickly over time. Change the delay between study and test to see what they experience.</p>
 				</div>
 				<div class="var">
 					<h3>Distractors</h3>
-					<input id="distract" type="number" name="distractors" placeholder="3" min="0" max="3" value="3">
+					<select name="distract" id="distract" place="3">
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="">3</option>
+					</select>
+					<!-- <input id="distract" type="number" name="distractors" placeholder="3" min="0" max="3" value="3"> -->
 					<p>Performance on memory tests is greatly affected by the number of available choices. With two choices, you could get 50% correct just by guessing. With 3 or 4 choices, guesses will only be correct 33% or 25% of the time.</p>
 					
 				</div>
@@ -191,12 +251,14 @@
 	]
 
 	var images=[];
+	var index=0;
 	var maxNum = 4;
 	var curPics= monkeyPics;
 	var picked;
 	var seconds=1000;
 	numCorrect=0;
 	numTrials=0;
+	index
 
 
 	goodSound = new Howl({ src: ['./mts/sounds/Excellent.wav']});
@@ -245,12 +307,27 @@
 		if($(this).val() === "patterns"){
 			curPics=patternPics;
 		}
+		shuffle(curPics);
+		index=0;
+
 		starting();
 		
 	})
 
+	$("#reset").on("click",function(){
+		numCorrect=0;
+		numTrials=0;
+		$("#numCorrect").text( "0.00%");
+		starting();
+	})
+
+
 
 	function starting(){
+		if(index === (curPics.length)-2){
+			shuffle(curPics);
+			index=0;
+		}
 		//set visibility of everything to hidden except for start button
 		$(".option").css("visibility","hidden");
 		$("#imgCen").css("visibility","hidden");
@@ -296,17 +373,27 @@
 
 	function generateImages(){
 		images=[]
+		index++;
+		images.push(curPics[index]);
 		while(images.length<maxNum){
 			var temp = Math.floor(Math.random() * curPics.length);
 			if(images.indexOf(curPics[temp]) === -1) images.push(curPics[temp]);	
 		}
+		shuffle(images);
 	}
 
 	function picking(){
-		var temp = Math.floor(Math.random() * images.length);
-		return images[temp];
+		// var temp = Math.floor(Math.random() * images.length);
+		// return images[temp];
+		return curPics[index];
 	}
 
+	function shuffle(array) {
+	  for (let i = array.length - 1; i > 0; i--) {
+	    let j = Math.floor(Math.random() * (i + 1));
+	    [array[i], array[j]] = [array[j], array[i]];
+	  }
+	}
 
 
 
