@@ -7,6 +7,7 @@
 <html>
 <head>
 	<title>Match To Sample</title>
+	<link rel="icon" href="./mts/imgs/emory.png">
 	<style type="text/css">
 		body{
 			font-family: "monsterrat","Avenir";
@@ -106,7 +107,7 @@
 	<h1>Matching to Sample Test</h1>
 
 	<div id="stripe">
-			<h3 id="score">Percent Correct: <span id="numCorrect"> 0 </span></h3>
+			<h3 id="score">Percent Correct: <span id="numCorrect"> 0.00% </span></h3>
 	</div>
 
 
@@ -220,7 +221,6 @@
 		}
 
 		$(".option").css("visibility","hidden");
-		$("#imgCen").css("visibility","visible");
 		$("#numCorrect").text((numCorrect/numTrials*100).toFixed(2) + "%");
 		setTimeout(starting, 2000);
 		
