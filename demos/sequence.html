@@ -1,9 +1,4 @@
 
-<!-- to do -->
-	<!-- Can you send me the audio "excellent" and "doe" for the reactions  -->
-	<!-- can you send me the pictures so I can add a cartoon option? I do not currently have those images. -->
-	<!-- do you think I should move the variables to the side? -->
-	<!-- should the locations be randomized? -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,7 +178,6 @@
 
 <!-- ////////////////////////////////////////////////////////////// -->
 <script type="text/javascript">
-	// to do: make a list of cartoon image versions as well
 
 	var stimuli = document.querySelectorAll(".stim");
 
@@ -216,7 +210,7 @@
 
 			console.log($(this).attr("src"))
 			console.log(curSeq[curSpot])
-			if($(this).attr("src") ===curSeq[curSpot]){ // to do: need to change this condition
+			if($(this).attr("src") ===curSeq[curSpot]){ 
 				$(this).addClass("correct")
 				curSpot++;
 				if (curSpot=== curSeq.length){
@@ -286,7 +280,6 @@
 
 
 
-	// to do!!
 	function testing(){
 		active=true;
 		// display the correct number of images
@@ -298,8 +291,6 @@
 		}
 	}
 
-
-	// to do!!
 	function generateImages(){
 		curSeq= seqA;
 		spots=[];
